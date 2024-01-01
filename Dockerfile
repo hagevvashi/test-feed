@@ -20,6 +20,8 @@ RUN groupdel ${GNAME} \
         gosu \
         curl \
         ca-certificates \
+        gcc \
+        build-essential \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/* \
     && chmod +s $(which gosu)
