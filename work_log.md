@@ -1,3 +1,13 @@
+## 2024.01.01 - ca-certificates を install しないと https://sh.rustup.rs の curl リクエストからの sh 処理がうまく行ってなさそう
+
+- 原因は不明
+- コマンドはこれ `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${RUST_VERSION}`
+- curl のオプションが悪い？
+    - `--proto '=https'`
+    - `--tlsv1.2`
+    - `-sSf`
+- ひとまず ca-certificates を install しておく
+
 ## 2024.01.01 - そもそもイメージ自体をキャッシュしないなら Entrypoint で useradd, groupadd する必要ない
 
 ### Why
