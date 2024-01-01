@@ -1,4 +1,28 @@
-## gosu で root になれない
+## 2024.01.01 - そもそもイメージ自体をキャッシュしないなら Entrypoint で useradd, groupadd する必要ない
+
+### Why
+
+- そもそものところから、コンテナイメージを作る際にユーザ名やグループ名が決まる場合であれば Dockerfile 内で useradd, groupadd を実行すればよいことに気づいた
+- rustup コマンドに PATH を通したい場合はシェルにログイン時に export する必要があるので一旦 Entrypoint 内で実施しておく
+
+### What
+
+- Entrypoint の処理を Dockerfile に移す
+- rustup コマンドへ PATH を通すのは Entrypoint で実施
+
+### How
+
+- --build-arg を用いて Dockerfile に変数を渡す
+- Dockerfile 内で USER を用いてログインユーザを決める
+- USER を用いているので、Entrypoint 内では gosu の引数に whoami の実行結果を返す
+
+### refs
+
+- https://qiita.com/legokichi/items/04fdafd3f55b03c7bb49
+
+---
+
+## 2023.12.31 - gosu で root になれない
 
 ### Context
 
